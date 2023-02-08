@@ -9,8 +9,9 @@
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-  <h3>后台管理系统</h3>
+    <h3>后台管理系统</h3>
     <el-menu-item
+      @click="clickMenu(item)"
       v-for="item in noChildren"
       :key="item.name"
       :index="item.name"
@@ -28,7 +29,7 @@
         <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group v-for="citem in item.children" :key="citem.name">
-        <el-menu-item :index="citem.name">{{ citem.label }}</el-menu-item>
+        <el-menu-item @click="clickMenu(citem)" :index="citem.name">{{ citem.label }}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -41,7 +42,7 @@ export default {
       isCollapse: false,
       menu: [
         {
-          path: "/",
+          path: "/home",
           name: "home",
           label: "首页",
           icon: "s-home",
@@ -90,6 +91,11 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    // 点击事件
+    clickMenu(item) {
+      if(this.$route.path !== item.path)
+      this.$router.push(item.path)
     },
   },
   computed: {

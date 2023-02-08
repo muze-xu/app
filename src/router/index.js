@@ -2,11 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 1. 定义 (路由) 组件。
 // 可以从其他文件 import 进来
+import main from '../views/main'
 import home from '../views/home'
 import login from '../views/login'
-import main from '../views/main'
+import mall from '../views/mall'
+import user from '../views/user'
+import pageOne from '../views/pageOne'
+import pageTwo from '../views/pageTwo'
 
-// 2. 定义路由
+// 2. 定义路由'
 // 每个路由应该映射一个组件。 其中"component" 可以是
 // 通过 Vue.extend() 创建的组件构造器，
 // 或者，只是一个组件配置对象。
@@ -14,9 +18,14 @@ import main from '../views/main'
 const routes = [
   { path: '/', 
   component: main,
+  redirect: '/home',
   children: [
     { path: 'home', component: home },
-    { path: 'login', component: login }
+    { path: 'login', component: login },
+    { path: 'mall', component: mall },
+    { path: 'user', component: user },
+    { path: '/page1', component: pageOne },
+    { path: '/page2', component: pageTwo },
   ]
  },
 ]
