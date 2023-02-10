@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside width="auto">
       <common-aside />
     </el-aside>
     <el-container>
@@ -8,7 +8,6 @@
         <common-header />
       </el-header>
       <el-main>
-        <h1>我是main</h1>
         <router-view></router-view>
       </el-main>
     </el-container>

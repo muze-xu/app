@@ -10,6 +10,8 @@ import user from '../views/user'
 import pageOne from '../views/pageOne'
 import pageTwo from '../views/pageTwo'
 
+Vue.use(VueRouter)
+
 // 2. 定义路由'
 // 每个路由应该映射一个组件。 其中"component" 可以是
 // 通过 Vue.extend() 创建的组件构造器，
@@ -38,4 +40,3 @@ const router = new VueRouter({
 
 export default router
 
-Vue.use(VueRouter)
