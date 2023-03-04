@@ -1,9 +1,20 @@
 <template>
   <div class="header-container">
     <div class="left-content">
-      <el-button @click="handleMenu" icon="el-icon-menu" size="mini"></el-button>
+      <el-button
+        @click="handleMenu"
+        icon="el-icon-menu"
+        size="mini"
+      ></el-button>
       <!-- 面包屑 -->
-      <span class="text">首页</span>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item
+          v-for="item in tags"
+          :key="item.path"
+          :to="{ path: item.path }"
+          >{{ item.label }}</el-breadcrumb-item
+        >
+      </el-breadcrumb>
     </div>
     <div class="right-content">
       <el-dropdown>
@@ -23,17 +34,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  data(){
-    return {
-
-    }
+  data() {
+    return {};
   },
   methods: {
-    handleMenu(){
-      this.$store.commit('collapseMenu');
-    }
-  }
+    handleMenu() {
+      this.$store.commit("collapseMenu");
+    },
+  },
+  computed: {
+    ...mapState({
+      tags: (state) => state.tab.tableList,
+    }),
+  },
+  mounted() {
+    console.log(this.tags);
+  },
 };
 </script>
 
@@ -46,15 +64,24 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.left-content{
+.left-content {
   .text {
     color: #fff;
     font-size: 14px;
     margin-left: 10px;
   }
-}
+  display: flex;
+  align-items: center;
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+    font-weight: normal;
+    color: #666 !important;
+  }
 
-.right-content{
+  .el-button {
+    margin-right: 20px;
+  }
+}
+.right-content {
   .user {
     width: 40px;
     height: 40px;

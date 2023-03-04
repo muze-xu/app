@@ -22,12 +22,12 @@ const routes = [
   component: main,
   redirect: '/home',
   children: [
-    { path: 'home', component: home },
-    { path: 'login', component: login },
-    { path: 'mall', component: mall },
-    { path: 'user', component: user },
-    { path: '/page1', component: pageOne },
-    { path: '/page2', component: pageTwo },
+    { path: 'home', name:"home", component: home },
+    { path: 'login', name:"login", component: login },
+    { path: 'mall', name:"mall",component: mall },
+    { path: 'user', name:"user", component: user },
+    { path: '/page1', name:"page1", component: pageOne },
+    { path: '/page2', name:"page2", component: pageTwo },
   ]
  },
 ]

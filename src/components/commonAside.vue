@@ -95,6 +95,7 @@ export default {
     clickMenu(item) {
       if(this.$route.path !== item.path)
       this.$router.push(item.path)
+      this.$store.commit("selectMenu",item);
     },
   },
   computed: {

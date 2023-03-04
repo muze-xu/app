@@ -51,8 +51,13 @@
         <div ref="echarts1" style="height: 280px"></div>
       </el-card>
       <div class="graph">
-        <el-card style="height: 260px"></el-card>
-        <el-card style="height: 260px"></el-card>
+        <!-- 柱状图 -->
+        <el-card style="height: 260px">
+          <div ref="echarts2" style="height: 260px"></div>
+        </el-card>
+        <el-card style="height: 260px">
+          <div ref="echarts3" style="height: 230px"></div>
+        </el-card>
       </div>
     </el-col>
   </el-row>
@@ -115,13 +120,13 @@ export default {
     getData().then((res) => {
       const { tableData } = res.data;
       this.tableData = tableData;
-      console.log(res.data);
+      // console.log(res.data);
 
       // 基于准备好的dom，初始化echarts实例
       const echarts1 = echarts.init(this.$refs.echarts1);
       // 指定图表的配置项和数据
       var option1 = {};
-      const { orderData } = res.data;
+      const { orderData, userData, videoData} = res.data;
       const xAxis = Object.keys(orderData.data[0]);
       const xAxisData = {
         data: xAxis,
@@ -129,7 +134,6 @@ export default {
       option1.xAxis = xAxisData;
       option1.yAxis = {};
       option1.legend = xAxisData;
-      console.log(xAxis);
       option1.series = [];
       xAxis.forEach((key) => {
         option1.series.push({
@@ -138,8 +142,86 @@ export default {
           type: "line",
         });
       });
-      console.log(option1.series);
       echarts1.setOption(option1);
+
+      // 柱状图
+      const echarts2 = echarts.init(this.$refs.echarts2);
+      const echarts2Option = {
+        legend: {
+          // 图例文字颜色
+          textStyle: {
+            color: "#333",
+          },
+        },
+        grid: {
+          left: "20%",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        xAxis: {
+          type: "category", //类目轴
+          data: userData.map((item) => item.date),
+          axisLine: {
+            lineStyle: {
+              color: "#17b3a3",
+            },
+          },
+          axisLable: {
+            interval: 0,
+            color: "#333",
+          },
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              lineStyle: {
+                color: "#17b3a3",
+              },
+            },
+          },
+        ],
+        color: ["#2ec7c9", "#b6a2de"],
+        series: [
+          {
+            name: "新增用户",
+            data: userData.map((item) => item.new),
+            type: "bar",
+          },
+          {
+            name: "活跃用户",
+            data: userData.map((item) => item.active),
+            type: "bar",
+          },
+        ],
+      };
+      // console.log(echarts2Option);
+      echarts2.setOption(echarts2Option);
+
+      //饼状图
+      const echarts3 = echarts.init(this.$refs.echarts3);
+      const echarts3Option = {
+        tooltip: {
+          trigger: "item",
+        },
+        color: [
+          "#0f78f4",
+          "#dd536b",
+          "#9462ef",
+          "#a6a6a6",
+          "#e1bb22",
+          "#39c362",
+          "#3ed1cf",
+        ],
+        series: [
+          {
+            data: videoData,
+            type: "pie",
+          },
+        ],
+      };
+      echarts3.setOption(echarts3Option);
     });
   },
 };
