@@ -40,10 +40,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { mapState } from "vuex";
 export default {
-  data() {
-    return {};
   data() {
     return {};
   },
@@ -72,7 +69,6 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.left-content {
 .left-content {
   .text {
     color: #fff;
