@@ -6,6 +6,11 @@
         icon="el-icon-menu"
         size="mini"
       ></el-button>
+      <el-button
+        @click="handleMenu"
+        icon="el-icon-menu"
+        size="mini"
+      ></el-button>
       <!-- 面包屑 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item
@@ -35,7 +40,10 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapState } from "vuex";
 export default {
+  data() {
+    return {};
   data() {
     return {};
   },
@@ -64,6 +72,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+.left-content {
 .left-content {
   .text {
     color: #fff;
