@@ -126,7 +126,7 @@ export default {
       const echarts1 = echarts.init(this.$refs.echarts1);
       // 指定图表的配置项和数据
       var option1 = {};
-      const { orderData, userData, videoData} = res.data;
+      const { orderData, userData, videoData } = res.data;
       const xAxis = Object.keys(orderData.data[0]);
       const xAxisData = {
         data: xAxis,

@@ -18,7 +18,7 @@ export default {
                     }
                 )
             )
-        };
+        }
         return {
             videoData: [
                 { name: "小米", value: "2999" },

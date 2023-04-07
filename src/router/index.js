@@ -3,12 +3,8 @@ import VueRouter from 'vue-router'
 // 1. 定义 (路由) 组件。
 // 可以从其他文件 import 进来
 import main from '../views/vMain'
-import home from '../views/vHome'
 import login from '../views/vLogin'
-import mall from '../views/vMall'
-import user from '../views/vUser'
-import pageOne from '../views/pageOne'
-import pageTwo from '../views/pageTwo'
+
 
 Vue.use(VueRouter)
 
@@ -18,18 +14,24 @@ Vue.use(VueRouter)
 // 或者，只是一个组件配置对象。
 // 我们晚点再讨论嵌套路由。
 const routes = [
-  { path: '/', 
-  component: main,
-  redirect: '/home',
-  children: [
-    { path: 'home', name:"home", component: home },
-    { path: 'login', name:"login", component: login },
-    { path: 'mall', name:"mall",component: mall },
-    { path: 'user', name:"user", component: user },
-    { path: '/page1', name:"page1", component: pageOne },
-    { path: '/page2', name:"page2", component: pageTwo },
-  ]
- },
+  {
+    path: '/',
+    name:'main',
+    component: main,
+    redirect: '/home',
+    children: [
+      // { path: 'home', name: "home", component: home },
+      // { path: 'mall', name: "mall", component: mall },
+      // { path: 'user', name: "user", component: user },
+      // { path: '/page1', name: "page1", component: pageOne },
+      // { path: '/page2', name: "page2", component: pageTwo },
+    ]
+  },
+  {
+    path: '/login',
+    name: "login",
+    component: login
+  },
 ]
 
 // 3. 创建 router 实例，然后传 `routes` 配置

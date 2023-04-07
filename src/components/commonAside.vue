@@ -9,7 +9,7 @@
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <h3>{{ isCollapse ? '后台' : '通用后台管理'}}</h3>
+    <h3>{{ isCollapse ? "后台" : "通用后台管理" }}</h3>
     <el-menu-item
       @click="clickMenu(item)"
       v-for="item in noChildren"
@@ -29,59 +29,19 @@
         <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group v-for="citem in item.children" :key="citem.name">
-        <el-menu-item @click="clickMenu(citem)" :index="citem.name">{{ citem.label }}</el-menu-item>
+        <el-menu-item @click="clickMenu(citem)" :index="citem.name">{{
+          citem.label
+        }}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
 </template>
 
 <script>
+import Cookie from "js-cookie"
 export default {
   data() {
     return {
-      menu: [
-        {
-          path: "/home",
-          name: "home",
-          label: "首页",
-          icon: "s-home",
-          url: "Home/Home",
-        },
-        {
-          path: "/mall",
-          name: "mall",
-          label: "商品管理",
-          icon: "video-play",
-          url: "MallManage/MallManage",
-        },
-        {
-          path: "/user",
-          name: "user",
-          label: "用户管理",
-          icon: "user",
-          url: "UserManage/UserManage",
-        },
-        {
-          label: "其他",
-          icon: "location",
-          children: [
-            {
-              path: "/page1",
-              name: "page1",
-              label: "首页1",
-              icon: "setting",
-              url: "Other/PageOne",
-            },
-            {
-              path: "/page2",
-              name: "page2",
-              label: "首页2",
-              icon: "setting",
-              url: "Other/PageTwo",
-            },
-          ],
-        },
-      ],
     };
   },
   methods: {
@@ -93,23 +53,29 @@ export default {
     },
     // 点击事件
     clickMenu(item) {
-      if(this.$route.path !== item.path)
-      this.$router.push(item.path)
-      this.$store.commit("selectMenu",item);
+      if (this.$route.path !== item.path) this.$router.push(item.path);
+      this.$store.commit("selectMenu", item);
     },
   },
   computed: {
     // 没有子菜单
     noChildren() {
-      return this.menu.filter((item) => !item.children);
+      return this.menuData.filter((item) => !item.children);
     },
     // 有子菜单
     hasChildren() {
-      return this.menu.filter((item) => item.children);
+      return this.menuData.filter((item) => item.children);
     },
-    isCollapse(){
+    menuData() {
+      // 判断当前数据,如果缓存中没有,当前store中去获取
+      if (Cookie.get('menu')) {
+        return JSON.parse(Cookie.get('menu'))
+      }
+      return this.$store.state.tab.menu
+    },
+    isCollapse() {
       return this.$store.state.tab.isCollapse;
-    }
+    },
   },
 };
 </script>

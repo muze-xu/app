@@ -17,16 +17,13 @@
       </el-breadcrumb>
     </div>
     <div class="right-content">
-      <el-dropdown>
+      <el-dropdown @command="handleClick">
         <span class="el-dropdown-link">
           <img class="user" src="../assets/images/user.png" alt="" />
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
-          <el-dropdown-item>螺蛳粉</el-dropdown-item>
-          <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-          <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+          <el-dropdown-item command="cancel">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -35,6 +32,7 @@
 
 <script>
 import { mapState } from "vuex";
+import Cookie from 'js-cookie'
 export default {
   data() {
     return {};
@@ -43,6 +41,17 @@ export default {
     handleMenu() {
       this.$store.commit("collapseMenu");
     },
+    handleClick(command) {
+            if (command === 'cancel') {
+                console.log('登出')
+                // 清除cookie中的token
+                Cookie.remove('token')
+                // 清除cookie中的menu
+                Cookie.remove('menu')
+                // 跳转到登录页
+                this.$router.push('/login')
+            }
+        }
   },
   computed: {
     ...mapState({

@@ -1,3 +1,4 @@
+import Cookies from "js-cookie"
 export default {
   state: {
     isCollapse: false,  // 控制菜单的展开还是收起
@@ -10,6 +11,7 @@ export default {
         url: "Home/Home",
       },
     ],  // 面包屑的数据
+    menu: []
 
   },
   mutations: {
@@ -34,5 +36,36 @@ export default {
     closeTag(state, index) {
       state.tableList.splice(index, 1)
     },
+    setMenu(state, val) {
+      state.menu = val
+      Cookies.set('menu', JSON.stringify(val))
+    },
+    addMenu(state, router) {
+      if (!Cookies.get('menu')) {
+        return
+      }
+      const menu = JSON.parse(Cookies.get('menu'))
+      console.log(menu,'menu')
+      state.menu = menu
+      // 组装动态路由的数据
+      const menuArray = []
+      menu.forEach(item => {
+        if (item.children) {
+          item.children = item.children.map(item => {
+            item.component = () => import(`../views/${item.url}`)
+            return item
+          })
+          menuArray.push(...item.children)
+        }else{
+          item.component = () => import(`../views/${item.url}`)
+          menuArray.push(item)
+        }
+      });
+      console.log(menuArray,'menuArray')
+      menuArray.forEach(item =>{
+        router.addRoute('main',item)
+      })
+      console.log(router)
+    }
   }
 }
