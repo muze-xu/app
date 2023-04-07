@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 1. 定义 (路由) 组件。
 // 可以从其他文件 import 进来
-import main from '../views/main'
-import home from '../views/home'
-import login from '../views/login'
-import mall from '../views/mall'
-import user from '../views/user'
+import main from '../views/vMain'
+import home from '../views/vHome'
+import login from '../views/vLogin'
+import mall from '../views/vMall'
+import user from '../views/vUser'
 import pageOne from '../views/pageOne'
 import pageTwo from '../views/pageTwo'
 

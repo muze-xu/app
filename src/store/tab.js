@@ -29,6 +29,10 @@ export default {
       }
       state.tableList.push(val)
       // console.log(state.tableList)
-    }
+    },
+    // 更新面包屑数据
+    closeTag(state, index) {
+      state.tableList.splice(index, 1)
+    },
   }
 }

@@ -6,11 +6,6 @@
         icon="el-icon-menu"
         size="mini"
       ></el-button>
-      <el-button
-        @click="handleMenu"
-        icon="el-icon-menu"
-        size="mini"
-      ></el-button>
       <!-- 面包屑 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item

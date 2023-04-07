@@ -7,7 +7,7 @@
       <el-header>
         <common-header />
       </el-header>
-      <common-tag/>
+      <common-tag />
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import commonAside from '@/components/commonAside.vue';
-import commonHeader from '@/components/commonHeader.vue'
-import commonTag from '@/components/commonTag.vue'
+import commonAside from "@/components/commonAside.vue";
+import commonHeader from "@/components/commonHeader.vue";
+import commonTag from "@/components/commonTag.vue";
 export default {
   data() {
     return {};
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-header{
-  padding:0pt;
+.el-header {
+  padding: 0pt;
 }
 </style>
